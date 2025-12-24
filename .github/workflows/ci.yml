@@ -10,7 +10,7 @@ jobs:
 
     steps:
     - name: Baixar Codigo (Checkout)
-      uses: sections/checkout@v3
+      uses: actions/checkout@v3
 
     - name: Construir Imagem Docker
       run: Docker build -t site-secreto:v1 .
