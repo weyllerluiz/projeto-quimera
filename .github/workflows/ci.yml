@@ -1,0 +1,22 @@
+name: Pipeline Blindado
+
+on:
+   push:
+     branches: [ "main" ]
+
+jobs:
+  construcao-e-teste:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Baixar Codigo (Checkout)
+      uses: sections/checkout@v3
+
+    - name: Construir Imagem Docker
+      run: Docker build -t site-secreto:v1 .
+
+    - name: Teste de Execucao
+      run: |
+        docker run -d -p 8080:80 --name teste-robo site-secreto:v1
+        sleep 5
+        curl localhost:8080
